@@ -1,0 +1,27 @@
+Imaginemos por un momento que queremos entender cómo se mueve una ciudad… y cómo respira. Ese es exactamente el reto que hemos abordado: conectar los datos del tráfico real con la calidad del aire en un punto concreto de Zaragoza, y hacerlo de forma visual, comprensible y útil para la toma de decisiones.
+
+Durante varias horas recogimos 95 matrículas que pasaban por un punto de control. Pero no nos quedamos solo en la matrícula: cada vehículo venía acompañado de su etiqueta ambiental —B, C, ECO, 0 o Sin distintivo— lo que nos permite estimar su impacto contaminante. A partir de ahí, clasificamos y analizamos el parque móvil que circula por la zona.
+
+Los resultados son reveladores.
+Por un lado, vemos que los vehículos más contaminantes —los B y los Sin distintivo— representan 40 de los 95 coches, y además son responsables de la mayor parte de las emisiones estimadas. Ambos grupos generan alrededor de 3960 g de CO₂ por kilómetro, cada uno. En cambio, los ECO y los 0 emisiones suman casi la mitad del tráfico, pero su impacto es muy inferior: los ECO apenas aportan 1470 g/km y los 0 directamente no contaminan.
+
+Esto nos pinta una fotografía muy clara: la transición hacia vehículos más limpios está en marcha, pero todavía convive con un volumen importante de coches antiguos que siguen siendo los principales responsables de las emisiones.
+
+Ahora bien, ¿cómo se traduce esto en la calidad del aire real?
+Para responder a esa pregunta incorporamos un segundo conjunto de datos: una medición de calidad del aire tomada en la estación de Renovales, también en Zaragoza. Ese día, el AQI era 18, lo que indica un aire bueno, con el ozono como contaminante dominante. Los niveles de PM10, NO₂ y CO eran bajos, y las condiciones meteorológicas —temperatura suave, humedad moderada y viento de 4,6 m/s— favorecían la dispersión de contaminantes.
+
+La conclusión es interesante: aunque el tráfico incluye una proporción significativa de vehículos contaminantes, la calidad del aire en ese momento era buena. Esto nos recuerda que la contaminación no depende solo del tráfico, sino también de factores como el viento, la estabilidad atmosférica o la hora del día.
+
+Para visualizar todo esto desarrollamos un dashboard interactivo que muestra:
+
+Un gráfico con la contaminación total estimada por tipo de vehículo.
+
+Un gráfico con los niveles de contaminantes atmosféricos medidos en la estación.
+
+El objetivo es que cualquier persona —desde un técnico municipal hasta un ciudadano— pueda entender de un vistazo qué circula por la ciudad y qué se está respirando.
+
+En resumen, este reto demuestra cómo, con datos muy simples —matrículas, etiquetas y una medición de calidad del aire— podemos construir una herramienta poderosa para analizar movilidad, emisiones y salud ambiental. Y lo más importante: abre la puerta a decisiones más informadas, desde políticas de movilidad hasta campañas de concienciación.
+
+Este es solo el principio. Con más puntos de medición, más horas de datos y más variables, podríamos construir un modelo predictivo capaz de anticipar episodios de contaminación… y actuar antes de que ocurran.
+
+Ese es el futuro que queremos impulsar.
