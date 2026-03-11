@@ -8,7 +8,7 @@ Por un lado, vemos que los vehículos más contaminantes —los B y los Sin dist
 Esto nos pinta una fotografía muy clara: la transición hacia vehículos más limpios está en marcha, pero todavía convive con un volumen importante de coches antiguos que siguen siendo los principales responsables de las emisiones.
 
 Ahora bien, ¿cómo se traduce esto en la calidad del aire real?
-Para responder a esa pregunta incorporamos un segundo conjunto de datos: una medición de calidad del aire tomada en la estación de Renovales, también en Zaragoza. Ese día, el AQI era 18, lo que indica un aire bueno, con el ozono como contaminante dominante. Los niveles de PM10, NO₂ y CO eran bajos, y las condiciones meteorológicas —temperatura suave, humedad moderada y viento de 4,6 m/s— favorecían la dispersión de contaminantes.
+Para responder a esa pregunta incorporamos un segundo conjunto de datos: una medición de calidad del aire tomada en la estación de Renovales, también en Zaragoza. Ese día, el AQI (Air Quality Index) era 18, lo que indica un aire bueno, con el ozono como contaminante dominante. Los niveles de PM10, NO₂ y CO eran bajos, y las condiciones meteorológicas —temperatura suave, humedad moderada y viento de 4,6 m/s— favorecían la dispersión de contaminantes.
 
 La conclusión es interesante: aunque el tráfico incluye una proporción significativa de vehículos contaminantes, la calidad del aire en ese momento era buena. Esto nos recuerda que la contaminación no depende solo del tráfico, sino también de factores como el viento, la estabilidad atmosférica o la hora del día.
 
