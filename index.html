@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Contaminación</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    canvas { max-width: 900px; margin-bottom: 60px; }
+  </style>
+</head>
+<body>
+
+<h1>Dashboard de Contaminación</h1>
+
+<h2>1. Contaminación por etiqueta ambiental</h2>
+<canvas id="graficoEtiquetas" height="120"></canvas>
+
+<h2>2. Calidad del aire (AQI y contaminantes) en Huesca</h2>
+<canvas id="graficoAire" height="120"></canvas>
+
+<script>
+  // Contaminación inventada por etiqueta
+  const contaminacion = {
+    "B": 180,
+    "C": 140,
+    "ECO": 70,
+    "0": 0
+  };
+
+  // -------------------------------
+  //   CARGAR CSV DE COCHES
+  // -------------------------------
+  async function cargarCoches() {
+    const resp = await fetch("MatriculasConDistintivo.csv");
+    const texto = await resp.text();
+
+    const lineas = texto.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+
+    const acumulado = { "B": 0, "C": 0, "ECO": 0, "0": 0 };
+
+    for (const linea of lineas) {
+      const partes = linea.split(";");
+
+      if (partes.length < 3) continue;
+
+      let etiqueta = null;
+
+      if (partes.length >= 4) {
+        etiqueta = partes[3].trim().toUpperCase();
+      } else {
+        const horaYEtiqueta = partes[2].split(":");
+        if (horaYEtiqueta.length === 4) {
+          etiqueta = horaYEtiqueta[3].trim().toUpperCase();
+        }
+      }
+
+      if (!etiqueta) continue;
+      if (!contaminacion[etiqueta]) continue;
+
+      acumulado[etiqueta] += contaminacion[etiqueta];
+    }
+
+    dibujarGraficoEtiquetas(
+      Object.keys(acumulado),
+      Object.values(acumulado)
+    );
+  }
+
+  function dibujarGraficoEtiquetas(labels, valores) {
+    const ctx = document.getElementById("graficoEtiquetas").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Contaminación total (g CO₂)",
+          data: valores,
+          backgroundColor: [
+            "rgba(255, 193, 7, 0.6)",   // B
+            "rgba(33, 150, 243, 0.6)",  // C
+            "rgba(76, 175, 80, 0.6)",   // ECO
+            "rgba(0, 0, 0, 0.6)"        // 0
+          ],
+          borderColor: [
+            "rgba(255, 193, 7, 1)",
+            "rgba(33, 150, 243, 1)",
+            "rgba(76, 175, 80, 1)",
+            "rgba(0, 0, 0, 1)"
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "g CO₂" } },
+          x: { title: { display: true, text: "Etiqueta ambiental" } }
+        }
+      }
+    });
+  }
+
+  // -------------------------------
+  //   CARGAR CSV DE CALIDAD DEL AIRE
+  // -------------------------------
+  async function cargarAire() {
+  const resp = await fetch("calidad_aire_huesca.csv");
+  const texto = await resp.text();
+
+  console.log("CSV de aire cargado:");
+  console.log(texto);
+
+  const lineas = texto.split("\n").map(l => l.trim()).filter(l => l.length > 1);
+
+  console.log("Líneas procesadas:", lineas);
+
+  const columnas = lineas[1].split(",");
+
+  console.log("Columnas detectadas:", columnas);
+
+  // Ciudad = primeras 3 columnas
+  const ciudad = columnas[0].trim() + ", " + columnas[1].trim() + ", " + columnas[2].trim();
+
+  const aqi = parseFloat(columnas[3]);
+  const pm25 = parseFloat(columnas[5]);
+  const pm10 = parseFloat(columnas[6]);
+  const o3 = parseFloat(columnas[7]);
+  const no2 = parseFloat(columnas[8]);
+  const so2 = parseFloat(columnas[9]);
+  const co = parseFloat(columnas[10]);
+
+  console.log("Valores numéricos:", { aqi, pm25, pm10, o3, no2, so2, co });
+
+  dibujarGraficoAire(
+    ["AQI", "PM2.5", "PM10", "O₃", "NO₂", "SO₂", "CO"],
+    [aqi, pm25, pm10, o3, no2, so2, co]
+  );
+}
+
+
+
+
+  function dibujarGraficoAire(labels, valores) {
+    const ctx = document.getElementById("graficoAire").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Nivel de contaminantes",
+          data: valores,
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          borderColor: "rgba(255, 99, 132, 1)",
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "Concentración" } },
+          x: { title: { display: true, text: "Parámetro" } }
+        }
+      }
+    });
+  }
+
+  // Ejecutar ambos
+  cargarCoches();
+  cargarAire();
+</script>
+
+</body>
+</html>
